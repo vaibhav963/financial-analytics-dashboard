@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnalyticsSummary } from '../../types/index.js';
 import { Button } from '../common/Button.js';
-import { FileSpreadsheet, RefreshCw, Calendar } from 'lucide-react';
+import { RefreshCw, Calendar } from 'lucide-react';
 
 interface HeroBannerProps {
   analytics: AnalyticsSummary | null;

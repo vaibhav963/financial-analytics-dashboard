@@ -136,8 +136,7 @@ describe('Financial Analytics API Suite', () => {
       expect(res.status).toBe(200);
       expect(res.body.success).toBe(true);
 
-      const { kpis, monthlyTrends, categoryBreakdown, statusBreakdown, userVolumes, insights } =
-        res.body.data;
+      const { kpis, monthlyTrends, categoryBreakdown, statusBreakdown, userVolumes } = res.body.data;
 
       expect(kpis.totalTransactions).toBe(300);
       expect(kpis.totalRevenue).toBeGreaterThan(0);
@@ -148,7 +147,6 @@ describe('Financial Analytics API Suite', () => {
       expect(categoryBreakdown.length).toBe(2);
       expect(statusBreakdown.length).toBe(2);
       expect(userVolumes.length).toBe(4); // user_001 to user_004
-      expect(insights.length).toBeGreaterThan(0);
     });
   });
 

@@ -88,6 +88,3 @@ npm run build
     └── tests/          # Component tests (Vitest + RTL)
 ```
 
-## License
-
-MIT

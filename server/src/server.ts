@@ -63,8 +63,8 @@ export const createApp = () => {
   return app;
 };
 
-// Start server if run as main
-if (process.env.NODE_ENV !== 'test') {
+// Start server if run as main and not in Vercel Serverless environment
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   (async () => {
     try {
       await connectDB();

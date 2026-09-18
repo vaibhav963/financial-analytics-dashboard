@@ -131,7 +131,7 @@ export const SplitLoginPage: React.FC = () => {
 
               <button
                 type="button"
-                onClick={() => handleFillDemo('analyst')}
+                onClick={() => handleFillDemo()}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slateNavy-950 hover:bg-slateNavy-800 text-white text-xs font-bold transition-all shadow-sm group"
               >
                 <span>Sign in to take action</span>
