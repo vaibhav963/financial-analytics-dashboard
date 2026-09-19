@@ -30,6 +30,26 @@ export const createApp = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // Database connection check middleware (handles cold starts in serverless)
+  app.use(async (_req, res, next) => {
+    if (mongoose.connection.readyState !== 1) {
+      try {
+        await connectDB();
+      } catch (err: any) {
+        console.error('Database connection error:', err);
+        return res.status(500).json({
+          success: false,
+          alert: {
+            type: 'error',
+            title: 'Database Connection Error',
+            message: err.message || 'Failed to connect to MongoDB',
+          },
+        });
+      }
+    }
+    next();
+  });
+
   // Health check endpoint
   app.get('/api/health', (_req, res) => {
     res.json({
