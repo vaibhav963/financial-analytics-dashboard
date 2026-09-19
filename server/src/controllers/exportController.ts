@@ -52,6 +52,27 @@ const formatValue = (
   return String(value);
 };
 
+const normalizeColumns = (columns: any[]): CsvColumnConfig[] => {
+  if (!Array.isArray(columns)) return [];
+  return columns
+    .map((c: any, index: number) => {
+      if (typeof c === 'string') {
+        return { key: c, header: c.charAt(0).toUpperCase() + c.slice(1), enabled: true, order: index };
+      }
+      if (typeof c === 'object' && c !== null) {
+        return {
+          key: c.key,
+          header: c.header || c.key,
+          enabled: c.enabled !== false,
+          order: typeof c.order === 'number' ? c.order : index,
+        };
+      }
+      return null;
+    })
+    .filter((c): c is CsvColumnConfig => Boolean(c && c.enabled))
+    .sort((a, b) => a.order - b.order);
+};
+
 export const exportTransactionsCsv = async (req: Request, res: Response): Promise<void> => {
   try {
     const {
@@ -64,10 +85,8 @@ export const exportTransactionsCsv = async (req: Request, res: Response): Promis
       filterParams = {},
     }: CsvExportRequest = req.body;
 
-    // Filter active and ordered columns
-    const activeColumns: CsvColumnConfig[] = columns
-      .filter((c) => c.enabled)
-      .sort((a, b) => a.order - b.order);
+    // Filter active and ordered columns (supports both object configs and string arrays)
+    const activeColumns: CsvColumnConfig[] = normalizeColumns(columns);
 
     if (activeColumns.length === 0) {
       res.status(400).json({
@@ -138,9 +157,19 @@ export const getExportPreview = async (req: Request, res: Response): Promise<voi
       filterParams = {},
     }: CsvExportRequest = req.body;
 
-    const activeColumns = columns
-      .filter((c) => c.enabled)
-      .sort((a, b) => a.order - b.order);
+    const activeColumns = normalizeColumns(columns);
+
+    if (activeColumns.length === 0) {
+      res.status(400).json({
+        success: false,
+        alert: {
+          type: 'error',
+          title: 'Preview Failed',
+          message: 'At least one column must be enabled for CSV preview.',
+        },
+      });
+      return;
+    }
 
     let filter: any = {};
     if (scope === 'selected' && selectedIds && selectedIds.length > 0) {

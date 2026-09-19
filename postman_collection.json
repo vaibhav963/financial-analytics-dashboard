@@ -1,0 +1,392 @@
+{
+  "info": {
+    "_postman_id": "f912b5f5-6494-4504-924d-e48c7febf2fd",
+    "name": "Financial Analytics Dashboard API",
+    "description": "Comprehensive Postman collection for the Financial Analytics Dashboard API. Includes Authentication, Analytics, Transactions, and CSV Export endpoints configured for both Live Vercel deployment and Localhost.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://financial-analytics-dashboard-qxlq7fuh0.vercel.app/api",
+      "type": "string",
+      "description": "API Base URL (Change to http://localhost:5001/api for local testing)"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string",
+      "description": "Auto-populated JWT access token after running Login"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. System & Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Verify server health, MongoDB connection status, uptime, and environment."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Authentication",
+      "item": [
+        {
+          "name": "Login (Auto-captures Token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.accessToken) {",
+                  "    pm.collectionVariables.set(\"authToken\", jsonData.data.accessToken);",
+                  "    console.log(\"Auth token captured successfully!\");",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"Pass@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Authenticate user with email and password. Automatically stores the JWT access token in the collection variable {{authToken}}."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            },
+            "description": "Retrieve the current authenticated user profile, roles, and permissions."
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Elena Rostova\",\n  \"department\": \"Risk & Quantitative Analytics\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            },
+            "description": "Update profile information for the authenticated user."
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "refresh"]
+            },
+            "description": "Obtain a fresh access token using the httpOnly refresh cookie."
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
+            },
+            "description": "Invalidate user session and clear authentication cookies."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Analytics & KPIs",
+      "item": [
+        {
+          "name": "Get Analytics Summary",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/analytics/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["analytics", "summary"]
+            },
+            "description": "Fetch high-level KPI cards, monthly revenue vs expense trends, category distribution, settlement breakdown, and analyst volume comparisons."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Transactions",
+      "item": [
+        {
+          "name": "List Transactions (Paginated)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/transactions?page=1&limit=10&sortBy=date&sortOrder=desc",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "date"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "desc"
+                }
+              ]
+            },
+            "description": "Query paginated transaction ledger records with server-side sorting."
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Transactions (Multi-Param)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/transactions?category=Revenue&status=Settled&minAmount=500&maxAmount=10000&page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Revenue"
+                },
+                {
+                  "key": "status",
+                  "value": "Settled"
+                },
+                {
+                  "key": "minAmount",
+                  "value": "500"
+                },
+                {
+                  "key": "maxAmount",
+                  "value": "10000"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Filter transactions by category, settlement status, and amount ranges."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Transaction by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/transactions/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["transactions", "1"]
+            },
+            "description": "Retrieve specific transaction details by its unique identifier."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Export Studio",
+      "item": [
+        {
+          "name": "Preview Export Data",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"columns\": [\n    { \"key\": \"id\", \"header\": \"Transaction ID\", \"enabled\": true, \"order\": 0 },\n    { \"key\": \"date\", \"header\": \"Date\", \"enabled\": true, \"order\": 1 },\n    { \"key\": \"amount\", \"header\": \"Amount\", \"enabled\": true, \"order\": 2 },\n    { \"key\": \"category\", \"header\": \"Category\", \"enabled\": true, \"order\": 3 },\n    { \"key\": \"status\", \"header\": \"Status\", \"enabled\": true, \"order\": 4 },\n    { \"key\": \"user_id\", \"header\": \"User ID\", \"enabled\": true, \"order\": 5 }\n  ],\n  \"dateFormat\": \"yyyy-mm-dd\",\n  \"amountFormat\": \"currency_usd\",\n  \"statusFormat\": \"original\",\n  \"scope\": \"all\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/export/preview",
+              "host": ["{{baseUrl}}"],
+              "path": ["export", "preview"]
+            },
+            "description": "Preview formatted transaction rows before downloading the full CSV."
+          },
+          "response": []
+        },
+        {
+          "name": "Download CSV Export",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"columns\": [\n    { \"key\": \"id\", \"header\": \"Transaction ID\", \"enabled\": true, \"order\": 0 },\n    { \"key\": \"date\", \"header\": \"Date\", \"enabled\": true, \"order\": 1 },\n    { \"key\": \"amount\", \"header\": \"Amount\", \"enabled\": true, \"order\": 2 },\n    { \"key\": \"category\", \"header\": \"Category\", \"enabled\": true, \"order\": 3 },\n    { \"key\": \"status\", \"header\": \"Status\", \"enabled\": true, \"order\": 4 },\n    { \"key\": \"user_id\", \"header\": \"User ID\", \"enabled\": true, \"order\": 5 }\n  ],\n  \"dateFormat\": \"yyyy-mm-dd\",\n  \"amountFormat\": \"currency_usd\",\n  \"statusFormat\": \"original\",\n  \"scope\": \"all\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/export/csv",
+              "host": ["{{baseUrl}}"],
+              "path": ["export", "csv"]
+            },
+            "description": "Stream and download customized CSV report."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

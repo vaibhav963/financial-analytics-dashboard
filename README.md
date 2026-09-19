@@ -134,7 +134,13 @@ The database is automatically seeded on first launch with sample transactions, a
 
 ---
 
-## 📡 API Reference
+## 📡 API Reference & Postman Collection
+
+A pre-configured **Postman Collection** is included in the root of this repository: [`postman_collection.json`](./postman_collection.json).
+
+- **Import into Postman**: Import the file directly into Postman to test all endpoints.
+- **Auto-Token Capture**: Running the `POST /api/auth/login` request automatically extracts and sets the JWT bearer token for all protected requests.
+- **Environment Switcher**: Easily switch between Live Vercel (`https://financial-analytics-dashboard-qxlq7fuh0.vercel.app/api`) and Localhost (`http://localhost:5001/api`) via the `{{baseUrl}}` collection variable.
 
 Base URL: `/api`
 

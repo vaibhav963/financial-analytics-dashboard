@@ -186,6 +186,18 @@ export const getTransactions = async (req: Request, res: Response): Promise<void
 export const getTransactionById = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = Number(req.params.id);
+    if (isNaN(id)) {
+      res.status(400).json({
+        success: false,
+        alert: {
+          type: 'error',
+          title: 'Invalid Transaction ID',
+          message: 'Transaction ID must be a valid number (e.g. 1, 2, 3).',
+        },
+      });
+      return;
+    }
+
     const transaction = await Transaction.findOne({ id }).lean();
 
     if (!transaction) {
