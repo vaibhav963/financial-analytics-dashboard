@@ -1,5 +1,5 @@
-import { createApp } from '../src/server.js';
-import { connectDB } from '../src/config/db.js';
+import { createApp } from '../server/src/server.js';
+import { connectDB } from '../server/src/config/db.js';
 import type { Request, Response, NextFunction } from 'express';
 
 // Initialize the Express app

@@ -65,9 +65,6 @@ export const SplitLoginPage: React.FC = () => {
                 <AlertTriangle className="w-4 h-4 text-rose-500" />
                 <span>Cashflow Risk &amp; Settlement Alert</span>
               </div>
-              <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                <Sparkles className="w-3 h-3 text-emerald-600" /> AI Insight
-              </span>
             </div>
 
             {/* Headline */}
@@ -261,14 +258,6 @@ export const SplitLoginPage: React.FC = () => {
         {/* Footer */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-6 border-t border-slateNavy-100 text-[11px] text-slateNavy-400">
           <p>© 2026 Financial Analytics Intelligence</p>
-          <div className="flex items-center gap-4">
-            <a href="#privacy" onClick={(e) => e.preventDefault()} className="hover:text-slateNavy-600 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#support" onClick={(e) => e.preventDefault()} className="hover:text-slateNavy-600 transition-colors">
-              IT Support
-            </a>
-          </div>
         </div>
       </div>
     </div>
