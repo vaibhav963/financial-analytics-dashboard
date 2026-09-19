@@ -433,54 +433,56 @@ export const CsvExportModal: React.FC<CsvExportModalProps> = ({
                   {columns.map((col, index) => (
                     <div
                       key={col.key}
-                      className={`flex items-center gap-3 p-2.5 rounded-xl border transition-all ${
+                      className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-2.5 rounded-xl border transition-all ${
                         col.enabled
                           ? 'bg-white border-slateNavy-200 shadow-sm'
                           : 'bg-slateNavy-100/60 border-dashed border-slateNavy-200 opacity-60'
                       }`}
                     >
-                      {/* Reorder Buttons */}
-                      <div className="flex flex-col gap-0.5 shrink-0">
-                        <button
-                          type="button"
-                          onClick={() => moveColumn(index, 'up')}
-                          disabled={index === 0}
-                          className="p-1 rounded hover:bg-slateNavy-100 disabled:opacity-30"
-                          title="Move column up"
+                      <div className="flex items-center gap-3">
+                        {/* Reorder Buttons */}
+                        <div className="flex flex-col gap-0.5 shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => moveColumn(index, 'up')}
+                            disabled={index === 0}
+                            className="p-1 rounded hover:bg-slateNavy-100 disabled:opacity-30"
+                            title="Move column up"
+                          >
+                            <ArrowUp className="w-3 h-3 text-slateNavy-600" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => moveColumn(index, 'down')}
+                            disabled={index === columns.length - 1}
+                            className="p-1 rounded hover:bg-slateNavy-100 disabled:opacity-30"
+                            title="Move column down"
+                          >
+                            <ArrowDown className="w-3 h-3 text-slateNavy-600" />
+                          </button>
+                        </div>
+
+                        {/* Enable Checkbox */}
+                        <input
+                          type="checkbox"
+                          checked={col.enabled}
+                          onChange={() => toggleColumn(col.key)}
+                          className="w-4 h-4 rounded text-loopr-600 focus:ring-loopr-500 border-slateNavy-300 cursor-pointer"
+                          id={`col-${col.key}`}
+                        />
+
+                        {/* Field Key Label */}
+                        <label
+                          htmlFor={`col-${col.key}`}
+                          className="font-mono font-bold text-slateNavy-700 w-28 shrink-0 cursor-pointer"
                         >
-                          <ArrowUp className="w-3 h-3 text-slateNavy-600" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => moveColumn(index, 'down')}
-                          disabled={index === columns.length - 1}
-                          className="p-1 rounded hover:bg-slateNavy-100 disabled:opacity-30"
-                          title="Move column down"
-                        >
-                          <ArrowDown className="w-3 h-3 text-slateNavy-600" />
-                        </button>
+                          {col.key}
+                        </label>
                       </div>
 
-                      {/* Enable Checkbox */}
-                      <input
-                        type="checkbox"
-                        checked={col.enabled}
-                        onChange={() => toggleColumn(col.key)}
-                        className="w-4 h-4 rounded text-loopr-600 focus:ring-loopr-500 border-slateNavy-300 cursor-pointer"
-                        id={`col-${col.key}`}
-                      />
-
-                      {/* Field Key Label */}
-                      <label
-                        htmlFor={`col-${col.key}`}
-                        className="font-mono font-bold text-slateNavy-700 w-28 shrink-0 cursor-pointer"
-                      >
-                        {col.key}
-                      </label>
-
                       {/* Custom Alias Input */}
-                      <div className="flex-1 flex items-center gap-2">
-                        <span className="text-slateNavy-400 text-[11px]">Header Alias:</span>
+                      <div className="flex-1 flex items-center gap-2 w-full sm:w-auto pl-8 sm:pl-0">
+                        <span className="text-slateNavy-400 text-[11px] shrink-0">Header Alias:</span>
                         <input
                           type="text"
                           value={col.header}

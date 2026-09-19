@@ -37,7 +37,7 @@ export const UserVolumeBarChart: React.FC<UserVolumeBarChartProps> = ({ data, is
   };
 
   return (
-    <div className="glass-card p-6 rounded-2xl flex flex-col justify-between">
+    <div className="glass-card p-4 sm:p-6 rounded-2xl flex flex-col justify-between">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-base font-bold text-slateNavy-900 font-display">
@@ -59,6 +59,7 @@ export const UserVolumeBarChart: React.FC<UserVolumeBarChartProps> = ({ data, is
               fontSize={11}
               tickLine={false}
               axisLine={{ stroke: '#E2E8F0' }}
+              tickFormatter={(val: string) => val.replace('Analyst ', '')}
             />
             <YAxis
               stroke="#94A3B8"
@@ -91,7 +92,7 @@ export const UserVolumeBarChart: React.FC<UserVolumeBarChartProps> = ({ data, is
       </div>
 
       {/* User Mini Badges */}
-      <div className="grid grid-cols-4 gap-2 pt-2 border-t border-slateNavy-100">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slateNavy-100">
         {data.map((u) => (
           <div
             key={u.user_id}

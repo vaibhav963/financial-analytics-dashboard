@@ -58,7 +58,7 @@ export const StatCallout: React.FC<StatCalloutProps> = ({
 
       <div>
         <div className="flex items-baseline justify-between gap-2 flex-wrap">
-          <span className="text-2xl xl:text-3xl font-bold tracking-tight text-slateNavy-900 font-display">
+          <span className="text-xl sm:text-2xl xl:text-3xl font-bold tracking-tight text-slateNavy-900 font-display">
             {value}
           </span>
           {badge && (

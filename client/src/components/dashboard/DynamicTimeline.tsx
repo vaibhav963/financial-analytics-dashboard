@@ -24,7 +24,7 @@ export const DynamicTimeline: React.FC<DynamicTimelineProps> = ({
   const selectedTrend = trends[activeStep] || trends[0];
 
   return (
-    <div className="glass-card p-6 rounded-2xl">
+    <div className="glass-card p-4 sm:p-6 rounded-2xl">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-loopr-50 text-loopr-600 flex items-center justify-center">
@@ -46,61 +46,63 @@ export const DynamicTimeline: React.FC<DynamicTimelineProps> = ({
       </div>
 
       {/* Stepper Timeline Bar */}
-      <div className="relative flex items-center justify-between gap-1 overflow-x-auto pb-4 pt-2 px-2">
-        {/* Continuous Connecting Line */}
-        <div className="absolute top-6 left-6 right-6 h-0.5 bg-slateNavy-200 -z-0" />
+      <div className="overflow-x-auto pb-4 pt-2 px-1">
+        <div className="relative flex items-center justify-between gap-1 min-w-[840px] w-full px-4">
+          {/* Continuous Connecting Line */}
+          <div className="absolute top-6 left-6 right-6 h-0.5 bg-slateNavy-200 -z-0" />
 
-        {trends.map((item, idx) => {
-          const isActive = idx === activeStep;
-          const isNetPositive = item.netCashFlow >= 0;
+          {trends.map((item, idx) => {
+            const isActive = idx === activeStep;
+            const isNetPositive = item.netCashFlow >= 0;
 
-          return (
-            <button
-              key={item.month}
-              type="button"
-              onClick={() => {
-                setActiveStep(idx);
-                if (onSelectMonth) onSelectMonth(item.month);
-              }}
-              className="group relative z-10 flex flex-col items-center min-w-[70px] focus:outline-none cursor-pointer"
-            >
-              {/* Stepper Node */}
-              <div
-                className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-200 border-2 ${
-                  isActive
-                    ? 'bg-loopr-600 text-white border-loopr-600 shadow-glow scale-110'
-                    : isNetPositive
-                    ? 'bg-white text-emerald-600 border-emerald-400 group-hover:border-loopr-500'
-                    : 'bg-white text-rose-600 border-rose-400 group-hover:border-loopr-500'
-                }`}
+            return (
+              <button
+                key={item.month}
+                type="button"
+                onClick={() => {
+                  setActiveStep(idx);
+                  if (onSelectMonth) onSelectMonth(item.month);
+                }}
+                className="group relative z-10 flex flex-col items-center min-w-[70px] focus:outline-none cursor-pointer"
               >
-                {isActive ? (
-                  <CheckCircle2 className="w-4 h-4" />
-                ) : (
-                  <span>{item.month.slice(0, 3)}</span>
-                )}
-              </div>
+                {/* Stepper Node */}
+                <div
+                  className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-200 border-2 ${
+                    isActive
+                      ? 'bg-loopr-600 text-white border-loopr-600 shadow-glow scale-110'
+                      : isNetPositive
+                      ? 'bg-white text-emerald-600 border-emerald-400 group-hover:border-loopr-500'
+                      : 'bg-white text-rose-600 border-rose-400 group-hover:border-loopr-500'
+                  }`}
+                >
+                  {isActive ? (
+                    <CheckCircle2 className="w-4 h-4" />
+                  ) : (
+                    <span>{item.month.slice(0, 3)}</span>
+                  )}
+                </div>
 
-              {/* Month Label */}
-              <span
-                className={`text-[11px] font-bold mt-2 whitespace-nowrap transition-colors ${
-                  isActive
-                    ? 'text-loopr-700 font-extrabold'
-                    : 'text-slateNavy-500 group-hover:text-slateNavy-900'
-                }`}
-              >
-                {item.month}
-              </span>
-            </button>
-          );
-        })}
+                {/* Month Label */}
+                <span
+                  className={`text-[11px] font-bold mt-2 whitespace-nowrap transition-colors ${
+                    isActive
+                      ? 'text-loopr-700 font-extrabold'
+                      : 'text-slateNavy-500 group-hover:text-slateNavy-900'
+                  }`}
+                >
+                  {item.month}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Milestone Detail Card */}
       {selectedTrend && (
-        <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-loopr-50/60 via-slateNavy-50/80 to-cyan-50/60 border border-loopr-100/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-loopr-50/60 via-slateNavy-50/80 to-cyan-50/60 border border-loopr-100/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-extrabold uppercase text-loopr-800 tracking-wider">
                 Milestone Summary: {selectedTrend.month}
               </span>
@@ -126,7 +128,7 @@ export const DynamicTimeline: React.FC<DynamicTimelineProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-4 text-xs shrink-0">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs shrink-0 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slateNavy-200/50">
             <div className="flex items-center gap-1.5 font-semibold text-loopr-700">
               <TrendingUp className="w-4 h-4 text-loopr-600" />
               <span>

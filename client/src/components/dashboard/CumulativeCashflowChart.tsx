@@ -86,7 +86,7 @@ export const CumulativeCashflowChart: React.FC<CumulativeCashflowChartProps> = (
   const finalCumulative = processedData[processedData.length - 1]?.cumulative || 0;
 
   return (
-    <div className="glass-card p-6 rounded-2xl flex flex-col justify-between">
+    <div className="glass-card p-4 sm:p-6 rounded-2xl flex flex-col justify-between">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
@@ -107,7 +107,7 @@ export const CumulativeCashflowChart: React.FC<CumulativeCashflowChartProps> = (
         </div>
 
         {/* View Toggle */}
-        <div className="inline-flex items-center p-1 rounded-xl bg-slateNavy-100/80 border border-slateNavy-200 text-xs">
+        <div className="inline-flex items-center p-1 rounded-xl bg-slateNavy-100/80 border border-slateNavy-200 text-xs self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setViewMode('cumulative')}
@@ -152,6 +152,9 @@ export const CumulativeCashflowChart: React.FC<CumulativeCashflowChartProps> = (
               fontSize={11}
               tickLine={false}
               axisLine={{ stroke: '#E2E8F0' }}
+              tickFormatter={(val: string) => val.slice(0, 3)}
+              interval="preserveStartEnd"
+              minTickGap={6}
             />
             <YAxis
               stroke="#94A3B8"

@@ -18,15 +18,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenExportModal, selectedCount
     <header className="sticky top-4 z-40 px-4 sm:px-8 max-w-7xl mx-auto w-full">
       <nav
         aria-label="Main Navigation"
-        className="glass-pill-nav rounded-2xl px-4 py-3 flex items-center justify-between gap-4 transition-all"
+        className="glass-pill-nav rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-4 transition-all"
       >
         {/* Brand & Platform Identifier */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-slateNavy-950 flex items-center justify-center text-white shadow-sm">
-            <Layers className="w-5 h-5 text-indigo-400" />
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slateNavy-950 flex items-center justify-center text-white shadow-sm shrink-0">
+            <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />
           </div>
           <div>
-            <span className="font-display font-bold text-base tracking-tight text-slateNavy-950">
+            <span className="font-display font-bold text-sm sm:text-base tracking-tight text-slateNavy-950">
               Fin<span className="text-indigo-600">Flow</span>
             </span>
             <p className="hidden sm:block text-[11px] text-slateNavy-500 font-medium -mt-0.5">
@@ -36,7 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenExportModal, selectedCount
         </div>
 
         {/* Action Controls & User Section */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Quick Configurable CSV Export Trigger */}
           <Button
             variant="primary"
@@ -45,7 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenExportModal, selectedCount
             leftIcon={<Download className="w-3.5 h-3.5" />}
             title="Configure and Export CSV Report"
           >
-            <span>Export CSV</span>
+            <span>Export<span className="hidden sm:inline"> CSV</span></span>
             {selectedCount > 0 && (
               <span className="ml-1 px-1.5 py-0.2 rounded-full bg-white/20 text-[10px] font-bold">
                 {selectedCount}
@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenExportModal, selectedCount
 
               {/* User Dropdown Menu */}
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white border border-slateNavy-200 shadow-xl py-2 z-50 animate-fade-in">
+                <div className="absolute right-0 mt-2 w-[calc(100vw-2.5rem)] sm:w-64 max-w-64 rounded-2xl bg-white border border-slateNavy-200 shadow-xl py-2 z-50 animate-fade-in">
                   <div className="px-4 py-2.5 border-b border-slateNavy-100">
                     <p className="text-xs font-bold text-slateNavy-900">{user.name}</p>
                     <p className="text-[11px] text-slateNavy-500 truncate">{user.email}</p>

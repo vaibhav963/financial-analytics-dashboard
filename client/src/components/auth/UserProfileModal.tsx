@@ -124,16 +124,16 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
       aria-labelledby="user-profile-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slateNavy-950/70 backdrop-blur-md animate-fade-in"
     >
-      <div className="glass-panel w-full max-w-2xl rounded-3xl p-6 sm:p-8 shadow-2xl bg-white border border-slateNavy-200 flex flex-col max-h-[92vh] overflow-hidden">
+      <div className="glass-panel w-full max-w-2xl rounded-3xl p-4 sm:p-8 shadow-2xl bg-white border border-slateNavy-200 flex flex-col max-h-[92vh] overflow-hidden">
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-4 border-b border-slateNavy-100 shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-sm">
+            <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-sm shrink-0">
               <User className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h3 id="user-profile-title" className="text-lg font-bold text-slateNavy-900 font-display">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 id="user-profile-title" className="text-base sm:text-lg font-bold text-slateNavy-900 font-display">
                   Analyst Profile &amp; Workspace Settings
                 </h3>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 flex items-center gap-1">
@@ -149,7 +149,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slateNavy-400 hover:text-slateNavy-700 hover:bg-slateNavy-100 transition-colors"
+            className="p-2 rounded-xl text-slateNavy-400 hover:text-slateNavy-700 hover:bg-slateNavy-100 transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -157,9 +157,9 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
         </div>
 
         {/* Identity Snapshot Banner */}
-        <div className="mt-4 p-4 rounded-2xl bg-gradient-to-r from-slateNavy-900 to-indigo-950 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0 shadow-sm">
+        <div className="mt-4 p-4 rounded-2xl bg-gradient-to-r from-slateNavy-900 to-indigo-950 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shrink-0 shadow-sm">
           <div className="flex items-center gap-3.5">
-            <div className="relative group">
+            <div className="relative group shrink-0">
               <UserAvatar userId={user.id} userProfile={avatarUrl || user.avatarUrl} size="lg" />
               <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-slateNavy-900" />
             </div>
@@ -173,7 +173,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-right">
+          <div className="flex items-center gap-2 self-start sm:self-auto">
             <div className="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-center">
               <span className="text-[10px] text-slate-300 uppercase tracking-wider block font-semibold">User ID</span>
               <span className="text-xs font-mono font-bold text-indigo-300">USR-{user.id.slice(-6).toUpperCase()}</span>

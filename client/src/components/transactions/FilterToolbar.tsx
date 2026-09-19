@@ -48,9 +48,9 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
   return (
     <div className="space-y-4">
       {/* Primary Toolbar Row */}
-      <div className="glass-card p-4 rounded-2xl flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+      <div className="glass-card p-3.5 sm:p-4 rounded-2xl flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
         {/* Search Input */}
-        <div className="relative flex-1 min-w-[240px]">
+        <div className="relative flex-1 min-w-[200px] sm:min-w-[240px]">
           <Search className="w-4 h-4 text-slateNavy-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
@@ -72,7 +72,7 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
         </div>
 
         {/* Quick Filter Pill Groups */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
           {/* Category Filter Pills */}
           <div className="inline-flex items-center p-1 rounded-xl bg-slateNavy-100 border border-slateNavy-200 text-xs">
             {(['All', 'Revenue', 'Expense'] as const).map((cat) => (
@@ -110,11 +110,11 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
           </div>
 
           {/* User Select Dropdown */}
-          <div className="relative">
+          <div className="relative flex-1 sm:flex-initial min-w-[110px]">
             <select
               value={filters.user_id}
               onChange={(e) => setFilters((prev) => ({ ...prev, user_id: e.target.value }))}
-              className="text-xs font-semibold py-2 pl-3 pr-8 rounded-xl border border-slateNavy-200 bg-slateNavy-50/70 text-slateNavy-700 hover:bg-white focus:bg-white focus:border-loopr-500 cursor-pointer transition-all appearance-none"
+              className="w-full text-xs font-semibold py-2 pl-3 pr-8 rounded-xl border border-slateNavy-200 bg-slateNavy-50/70 text-slateNavy-700 hover:bg-white focus:bg-white focus:border-loopr-500 cursor-pointer transition-all appearance-none"
               aria-label="Filter by user"
             >
               <option value="All">All Users</option>
@@ -132,7 +132,7 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
             size="sm"
             onClick={() => setIsModalOpen(true)}
             leftIcon={<SlidersHorizontal className="w-3.5 h-3.5 text-loopr-600" />}
-            className="border-slateNavy-200"
+            className="border-slateNavy-200 flex-1 sm:flex-initial justify-center"
           >
             <span>Date &amp; Amount</span>
             {(filters.datePreset !== 'all' || filters.minAmount !== undefined) && (
@@ -143,7 +143,7 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
       </div>
 
       {/* Date Preset Pill Row */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs touch-pan-x scrollbar-none">
         <span className="text-slateNavy-400 font-bold uppercase text-[10px] tracking-wider shrink-0 mr-1 flex items-center gap-1">
           <Calendar className="w-3 h-3" /> Period:
         </span>
@@ -238,7 +238,7 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
           <button
             type="button"
             onClick={resetFilters}
-            className="text-[11px] font-bold text-rose-600 hover:text-rose-700 underline ml-2 transition-colors cursor-pointer"
+            className="text-[11px] font-bold text-rose-600 hover:text-rose-700 underline ml-auto sm:ml-2 transition-colors cursor-pointer"
           >
             Clear All
           </button>

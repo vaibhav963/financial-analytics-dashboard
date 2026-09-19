@@ -77,7 +77,7 @@ export const SplitLoginPage: React.FC = () => {
             </p>
 
             {/* 3 Metric Mini-Cards */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 mb-6">
               <div className="p-3 rounded-2xl bg-slateNavy-50/80 border border-slateNavy-200/60">
                 <span className="text-[10px] font-bold text-slateNavy-400 uppercase tracking-wider block mb-1">
                   Settlement Rate
@@ -91,10 +91,12 @@ export const SplitLoginPage: React.FC = () => {
                 <span className="text-[10px] font-bold text-slateNavy-400 uppercase tracking-wider block mb-1">
                   Operating Margin
                 </span>
-                <span className="text-sm sm:text-base font-extrabold text-slateNavy-900 font-display">
-                  39.2%
-                </span>
-                <span className="text-[10px] text-emerald-600 font-bold ml-1 block sm:inline">Surplus</span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-sm sm:text-base font-extrabold text-slateNavy-900 font-display">
+                    39.2%
+                  </span>
+                  <span className="text-[10px] text-emerald-600 font-bold">Surplus</span>
+                </div>
               </div>
 
               <div className="p-3 rounded-2xl bg-slateNavy-50/80 border border-slateNavy-200/60">
@@ -108,8 +110,8 @@ export const SplitLoginPage: React.FC = () => {
             </div>
 
             {/* Bottom Analyst Avatars & Action Trigger */}
-            <div className="flex items-center justify-between pt-4 border-t border-slateNavy-100">
-              <div className="flex items-center -space-x-2">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slateNavy-100">
+              <div className="flex items-center -space-x-2 self-start sm:self-auto">
                 <img
                   src="https://api.dicebear.com/7.x/avataaars/svg?seed=AlexVance"
                   alt="Analyst Alex Vance"
@@ -128,7 +130,7 @@ export const SplitLoginPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleFillDemo()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slateNavy-950 hover:bg-slateNavy-800 text-white text-xs font-bold transition-all shadow-sm group"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slateNavy-950 hover:bg-slateNavy-800 text-white text-xs font-bold transition-all shadow-sm group"
               >
                 <span>Sign in to take action</span>
                 <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
@@ -224,12 +226,12 @@ export const SplitLoginPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleFillDemo()}
-                  className="w-full flex items-center justify-between p-2 rounded-xl hover:bg-white hover:shadow-xs border border-transparent hover:border-slateNavy-200 transition-all text-left group"
+                  className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-2 rounded-xl hover:bg-white hover:shadow-xs border border-transparent hover:border-slateNavy-200 transition-all text-left group"
                 >
-                  <span>
+                  <span className="break-all sm:break-normal">
                     <strong className="text-slateNavy-900 font-sans">Super Admin:</strong> admin@gmail.com / Pass@123
                   </span>
-                  <span className="text-[10px] font-sans font-bold text-loopr-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[10px] font-sans font-bold text-loopr-600 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity self-end sm:self-auto shrink-0">
                     Fill →
                   </span>
                 </button>

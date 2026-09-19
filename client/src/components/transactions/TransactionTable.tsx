@@ -98,8 +98,8 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
   return (
     <div className="glass-card rounded-2xl overflow-hidden flex flex-col">
       {/* Table Top Summary Bar */}
-      <div className="px-6 py-4 border-b border-slateNavy-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slateNavy-50/40">
-        <div className="flex items-center gap-3">
+      <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slateNavy-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slateNavy-50/40">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
           <h2 className="text-base font-bold text-slateNavy-900 font-display">
             Transaction Ledger
           </h2>
@@ -114,7 +114,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
         </div>
 
         {/* Rows Per Page Selector */}
-        <div className="flex items-center gap-2 text-xs text-slateNavy-600">
+        <div className="flex items-center justify-between sm:justify-start w-full sm:w-auto gap-2 text-xs text-slateNavy-600">
           <span className="font-semibold">Show rows:</span>
           <select
             value={limit}
@@ -132,7 +132,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
 
       {/* Main Table Container */}
       <div className="overflow-x-auto w-full">
-        <table className="w-full text-left border-collapse" aria-label="Financial Transactions">
+        <table className="w-full min-w-[680px] text-left border-collapse" aria-label="Financial Transactions">
           <thead>
             <tr className="border-b border-slateNavy-200/80 bg-slateNavy-50 text-[11px] font-bold uppercase tracking-wider text-slateNavy-500">
               {/* Select All Checkbox */}
@@ -161,7 +161,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                 scope="col"
                 aria-sort={getAriaSort('id')}
                 onClick={() => onSort('id')}
-                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group"
+                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group whitespace-nowrap"
               >
                 <div className="flex items-center">
                   <span>Tx ID</span>
@@ -174,7 +174,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                 scope="col"
                 aria-sort={getAriaSort('date')}
                 onClick={() => onSort('date')}
-                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group"
+                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group whitespace-nowrap"
               >
                 <div className="flex items-center">
                   <Calendar className="w-3 h-3 mr-1 text-slateNavy-400" />
@@ -188,7 +188,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                 scope="col"
                 aria-sort={getAriaSort('amount')}
                 onClick={() => onSort('amount')}
-                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group"
+                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group whitespace-nowrap"
               >
                 <div className="flex items-center">
                   <DollarSign className="w-3 h-3 mr-1 text-slateNavy-400" />
@@ -202,7 +202,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                 scope="col"
                 aria-sort={getAriaSort('category')}
                 onClick={() => onSort('category')}
-                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group"
+                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group whitespace-nowrap"
               >
                 <div className="flex items-center">
                   <span>Category</span>
@@ -215,7 +215,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                 scope="col"
                 aria-sort={getAriaSort('status')}
                 onClick={() => onSort('status')}
-                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group"
+                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group whitespace-nowrap"
               >
                 <div className="flex items-center">
                   <span>Status</span>
@@ -228,7 +228,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                 scope="col"
                 aria-sort={getAriaSort('user_id')}
                 onClick={() => onSort('user_id')}
-                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group"
+                className="py-3.5 px-4 cursor-pointer hover:text-slateNavy-900 select-none group whitespace-nowrap"
               >
                 <div className="flex items-center">
                   <User className="w-3 h-3 mr-1 text-slateNavy-400" />
@@ -304,12 +304,12 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                     </td>
 
                     {/* Transaction ID */}
-                    <td className="py-3 px-4 font-bold text-slateNavy-900 font-mono">
+                    <td className="py-3 px-4 font-bold text-slateNavy-900 font-mono whitespace-nowrap">
                       #{tx.id}
                     </td>
 
                     {/* Date & Time */}
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 whitespace-nowrap">
                       <div className="flex flex-col">
                         <span className="font-semibold text-slateNavy-800">{date}</span>
                         <span className="text-[11px] text-slateNavy-400 font-mono">{time}</span>
@@ -317,7 +317,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                     </td>
 
                     {/* Amount */}
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 whitespace-nowrap">
                       <span
                         className={`font-bold font-mono text-sm ${
                           isRevenue ? 'text-emerald-600' : 'text-slateNavy-900'
@@ -328,17 +328,17 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                     </td>
 
                     {/* Category */}
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 whitespace-nowrap">
                       <AlertChip variant={tx.category} size="sm" />
                     </td>
 
                     {/* Status */}
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 whitespace-nowrap">
                       <AlertChip variant={tx.status} size="sm" />
                     </td>
 
                     {/* User Profile */}
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 whitespace-nowrap">
                       <div className="flex items-center gap-2.5">
                         <UserAvatar
                           userId={tx.user_id}
@@ -357,16 +357,16 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
       </div>
 
       {/* Table Pagination Footer */}
-      <div className="px-6 py-4 border-t border-slateNavy-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slateNavy-50/30">
+      <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-t border-slateNavy-100 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 bg-slateNavy-50/30">
         {/* Record Range Text */}
-        <p className="text-xs font-semibold text-slateNavy-500">
+        <p className="text-xs font-semibold text-slateNavy-500 text-center sm:text-left">
           Showing <span className="text-slateNavy-900">{pagination.total > 0 ? startRecord : 0}</span> to{' '}
           <span className="text-slateNavy-900">{endRecord}</span> of{' '}
           <span className="text-slateNavy-900">{pagination.total}</span> entries
         </p>
 
         {/* Page Nav Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto flex-wrap">
           <div className="flex items-center gap-1">
             <Button
               variant="outline"

@@ -29,7 +29,7 @@ export const CategoryDonutChart: React.FC<CategoryDonutChartProps> = ({ data, is
   const total = data.reduce((acc, curr) => acc + curr.totalAmount, 0);
 
   return (
-    <div className="glass-card p-6 rounded-2xl flex flex-col justify-between">
+    <div className="glass-card p-4 sm:p-6 rounded-2xl flex flex-col justify-between">
       <div>
         <div className="flex items-center justify-between">
           <h2 className="text-base font-bold text-slateNavy-900 font-display">

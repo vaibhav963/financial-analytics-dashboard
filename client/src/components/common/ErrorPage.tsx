@@ -182,7 +182,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
         </div>
 
         {/* Action Controls */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2.5 sm:gap-3">
           <Button
             variant="primary"
             size="md"

@@ -66,11 +66,11 @@ export const DateAmountFilterModal: React.FC<DateAmountFilterModalProps> = ({
       aria-labelledby="filter-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slateNavy-950/60 backdrop-blur-sm animate-fade-in"
     >
-      <div className="glass-panel w-full max-w-lg rounded-3xl p-6 shadow-2xl bg-white border border-slateNavy-200">
+      <div className="glass-panel w-full max-w-lg rounded-3xl p-4 sm:p-6 shadow-2xl bg-white border border-slateNavy-200">
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-4 border-b border-slateNavy-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-loopr-50 text-loopr-600 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-loopr-50 text-loopr-600 flex items-center justify-center shrink-0">
               <SlidersHorizontal className="w-4 h-4" />
             </div>
             <div>
@@ -84,7 +84,7 @@ export const DateAmountFilterModal: React.FC<DateAmountFilterModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl hover:bg-slateNavy-100 text-slateNavy-400 hover:text-slateNavy-700 transition-colors"
+            className="p-1.5 rounded-xl hover:bg-slateNavy-100 text-slateNavy-400 hover:text-slateNavy-700 transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -92,14 +92,14 @@ export const DateAmountFilterModal: React.FC<DateAmountFilterModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="py-5 space-y-6">
+        <div className="py-4 sm:py-5 space-y-5 sm:space-y-6">
           {/* Custom Date Range */}
           <div>
             <label className="flex items-center gap-1.5 text-xs font-bold text-slateNavy-800 uppercase tracking-wider mb-2">
               <Calendar className="w-3.5 h-3.5 text-loopr-600" />
               <span>Custom Date Range</span>
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <span className="text-[11px] font-semibold text-slateNavy-500 block mb-1">
                   Start Date
@@ -131,7 +131,7 @@ export const DateAmountFilterModal: React.FC<DateAmountFilterModalProps> = ({
               <DollarSign className="w-3.5 h-3.5 text-loopr-600" />
               <span>Transaction Amount Range ($)</span>
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <span className="text-[11px] font-semibold text-slateNavy-500 block mb-1">
                   Min Amount ($)
@@ -163,21 +163,22 @@ export const DateAmountFilterModal: React.FC<DateAmountFilterModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-slateNavy-100">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slateNavy-100">
           <Button
             variant="ghost"
             size="sm"
             onClick={handleReset}
             leftIcon={<RotateCcw className="w-3.5 h-3.5" />}
+            className="w-full sm:w-auto justify-center"
           >
             Clear Modal
           </Button>
 
-          <div className="flex items-center gap-2">
-            <Button variant="secondary" size="sm" onClick={onClose}>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <Button variant="secondary" size="sm" onClick={onClose} className="w-full sm:w-auto justify-center">
               Cancel
             </Button>
-            <Button variant="primary" size="sm" onClick={handleApply}>
+            <Button variant="primary" size="sm" onClick={handleApply} className="w-full sm:w-auto justify-center">
               Apply Filters
             </Button>
           </div>

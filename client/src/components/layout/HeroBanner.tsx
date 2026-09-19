@@ -36,26 +36,27 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           <h1 className="text-2xl sm:text-3xl font-bold text-slateNavy-950 font-display tracking-tight">
             Financial Analytics Overview
           </h1>
-          <div className="flex flex-wrap items-center gap-2.5 mt-1 text-xs text-slateNavy-500 font-medium">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mt-1.5 text-xs text-slateNavy-500 font-medium">
             <span className="inline-flex items-center gap-1 text-slateNavy-700 font-semibold bg-slateNavy-100 px-2 py-0.5 rounded-md">
               <Calendar className="w-3.5 h-3.5 text-slateNavy-500" />
               {startDateStr} – {endDateStr}
             </span>
-            <span>•</span>
+            <span className="hidden sm:inline">•</span>
             <span>{analytics?.kpis?.totalTransactions || 300} Verified Records</span>
-            <span>•</span>
+            <span className="hidden sm:inline">•</span>
             <span>USD Cashflow Ledger</span>
           </div>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 w-full sm:w-auto">
           <Button
             variant="outline"
             size="sm"
             onClick={onRefresh}
             isLoading={isLoading}
             leftIcon={<RefreshCw className="w-3.5 h-3.5" />}
+            className="w-full sm:w-auto justify-center"
           >
             Refresh Data
           </Button>
