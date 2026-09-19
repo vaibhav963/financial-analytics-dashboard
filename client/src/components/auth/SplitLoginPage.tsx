@@ -3,7 +3,6 @@ import { useAuth } from '../../context/AuthContext.js';
 import {
   Layers,
   AlertTriangle,
-  Sparkles,
   Lock,
   Eye,
   EyeOff,
