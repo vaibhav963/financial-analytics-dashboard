@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
 import { env } from './config/env.js';
 import { connectDB } from './config/db.js';
 import { seedDatabase } from './seeds/seed.js';
@@ -36,6 +37,9 @@ export const createApp = () => {
       service: 'Financial Analytics API',
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
+      dbConnected: mongoose.connection.readyState === 1,
+      hasMongoUri: Boolean(process.env.MONGODB_URI || env.MONGODB_URI),
+      nodeEnv: process.env.NODE_ENV,
     });
   });
 
