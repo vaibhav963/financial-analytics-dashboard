@@ -6,7 +6,7 @@ import {
   TrendingUp,
   TrendingDown,
   DollarSign,
-  Layers,
+  CreditCard,
 } from 'lucide-react';
 
 interface KpiGridProps {
@@ -67,7 +67,7 @@ export const KpiGrid: React.FC<KpiGridProps> = ({ analytics, isLoading }) => {
         badge={`${kpis.successRatePercentage.toFixed(0)}% paid`}
         subtitle="Verified Ledger Records"
         accentColor="slate"
-        icon={<Layers className="w-5 h-5 text-slateNavy-700" />}
+        icon={<CreditCard className="w-5 h-5 text-slateNavy-700" />}
       />
     </div>
   );
