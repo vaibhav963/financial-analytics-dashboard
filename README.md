@@ -8,11 +8,8 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com/)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-00C7B7?logo=vercel&logoColor=white)](https://financial-analytics-dashboard-qxlq7fuh0.vercel.app)
 
 A modern, full-stack financial analytics web application designed for real-time monitoring, transaction management, interactive data visualization, and custom CSV data exports. Built with a sleek dark-mode glassmorphic design and engineered to be 100% responsive across all device form factors.
-
-🔗 **Live Deployment**: [financial-analytics-dashboard-qxlq7fuh0.vercel.app](https://financial-analytics-dashboard-qxlq7fuh0.vercel.app)
 
 ---
 
@@ -94,7 +91,7 @@ PORT=5001
 NODE_ENV=development
 
 # MongoDB Connection String (MongoDB Atlas or local)
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.fimik5r.mongodb.net/financial_dashboard?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.fimik5r.mongodb.net/
 
 # JWT Configuration
 JWT_SECRET=your_super_secret_jwt_access_key
@@ -118,29 +115,24 @@ VITE_API_URL=http://localhost:5001/api
 npm run dev
 ```
 
-- **Frontend Application**: `http://localhost:5173`
-- **Backend API Server**: `http://localhost:5001`
-- **Health Check**: `http://localhost:5001/api/health`
+- **Frontend Application**: [http://localhost:5173]
+- **Backend API Server**: [http://localhost:5001]
+- **Health Check**: [http://localhost:5001/api/health]
 
 ---
 
 ## 🔑 Demo Credentials
 
-The database is automatically seeded on first launch with sample transactions, analytics, and a pre-configured demo account (accessible via the **1-click Fill Demo** button on the login screen):
+The database is automatically seeded on first launch with sample transactions, analytics, and demo accounts:
 
 | Role | Email | Password |
 |---|---|---|
 | **Admin** | `admin@gmail.com` | `Pass@123` |
+| **Analyst** | `analyst@gmail.com` | `Pass@123` |
 
 ---
 
-## 📡 API Reference & Postman Collection
-
-A pre-configured **Postman Collection** is included in the root of this repository: [`postman_collection.json`](./postman_collection.json).
-
-- **Import into Postman**: Import the file directly into Postman to test all endpoints.
-- **Auto-Token Capture**: Running the `POST /api/auth/login` request automatically extracts and sets the JWT bearer token for all protected requests.
-- **Environment Switcher**: Easily switch between Live Vercel (`https://financial-analytics-dashboard-qxlq7fuh0.vercel.app/api`) and Localhost (`http://localhost:5001/api`) via the `{{baseUrl}}` collection variable.
+## 📡 API Reference
 
 Base URL: `/api`
 
